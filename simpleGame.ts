@@ -35,7 +35,6 @@ class SimpleGame
 		this.sprite.anchor.setTo( 0.5, 0.5 );
 
 
-
 		this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     this.game.stage.backgroundColor = '#2d2d2d';
@@ -44,6 +43,8 @@ class SimpleGame
 
     this.game.physics.arcade.enable(this.sprite);
     
+		this.sprite.body.velocity.y = 100;
+		this.sprite.body.collideWorldBounds=true;
     // group = game.add.physicsGroup();
 
     // for (var i = 0; i < 50; i++)
@@ -69,25 +70,25 @@ class SimpleGame
 
     // game.physics.arcade.overlap(sprite, group, collisionHandler, null, this);
 
-    this.sprite.body.velocity.x = 0;
-    this.sprite.body.velocity.y = 0;
+    // this.sprite.body.velocity.x = 0;
+    // this.sprite.body.velocity.y = 0;
 
     if (this.cursors.left.isDown)
     {
-			this.sprite.body.velocity.x = -200;
+			this.sprite.body.velocity.x += -40;
     }
     else if (this.cursors.right.isDown)
     {
-			this.sprite.body.velocity.x = 200;
+			this.sprite.body.velocity.x += 40;
     }
 
     if (this.cursors.up.isDown)
     {
-			this.sprite.body.velocity.y = -200;
+			this.sprite.body.velocity.y += -40;
     }
     else if (this.cursors.down.isDown)
     {
-			this.sprite.body.velocity.y = 200;
+			this.sprite.body.velocity.y += 40;
     }
 	}
 }
