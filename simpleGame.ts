@@ -1,7 +1,9 @@
 class SimpleGame
 {
 	game:Phaser.Game;
-	
+	cursors: Phaser.CursorKeys;
+	sprite: Phaser.Sprite;
+
 	constructor()
 	{
 		// create our phaser game
@@ -10,7 +12,7 @@ class SimpleGame
 		// Phaser.AUTO - determine the renderer automatically (canvas, webgl)
 		// 'content' - the name of the container to add our game to
 		// { preload:this.preload, create:this.create} - functions to call for our states
-		this.game = new Phaser.Game( 800, 600, Phaser.AUTO, 'content', { preload:this.preload, create:this.create} );
+		this.game = new Phaser.Game( 800, 600, Phaser.AUTO, 'content', { preload:this.preload, create:this.create, update:this.update} );
 	}
 	
 	
@@ -19,18 +21,74 @@ class SimpleGame
 		// add our logo image to the assets class under the
 		// key 'logo'. We're also setting the background colour
 		// so it's the same as the background colour in the image
-		this.game.load.image( 'logo', "assets/ds_logo.png" );
-		this.game.stage.backgroundColor = 0xB20059;
+		this.game.load.image( 'logo', "assets/netzkern-logo.png" );
+		this.game.stage.backgroundColor = 0xffff59;
 	}
 	
-	create()
+	create() 
 	{
 		// add the 'logo' sprite to the game, position it in the
 		// center of the screen, and set the anchor to the center of
 		// the image so it's centered properly. There's a lot of
 		// centering in that last sentence
-		var logo = this.game.add.sprite( this.game.world.centerX, this.game.world.centerY, 'logo' );
-		logo.anchor.setTo( 0.5, 0.5 );
+		this.sprite = this.game.add.sprite( this.game.world.centerX, this.game.world.centerY, 'logo' );
+		this.sprite.anchor.setTo( 0.5, 0.5 );
+
+
+
+		this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    this.game.stage.backgroundColor = '#2d2d2d';
+
+    // sprite = game.add.sprite(32, 200, 'phaser');
+
+    this.game.physics.arcade.enable(this.sprite);
+    
+    // group = game.add.physicsGroup();
+
+    // for (var i = 0; i < 50; i++)
+    // {
+    //     var c = group.create(game.rnd.between(100, 770), game.rnd.between(0, 570), 'veggies', game.rnd.between(0, 35));
+    //     c.body.mass = -100;
+    // }
+
+    // for (var i = 0; i < 20; i++)
+    // {
+    //     var c = group.create(game.rnd.between(100, 770), game.rnd.between(0, 570), 'veggies', 17);
+    // }
+
+    this.cursors = this.game.input.keyboard.createCursorKeys();
+
+	}
+
+	update() {
+		// if (this.game.physics.arcade.collide(sprite, group, collisionHandler, processHandler, this))
+    // {
+    //     console.log('boom');
+    // }
+
+    // game.physics.arcade.overlap(sprite, group, collisionHandler, null, this);
+
+    this.sprite.body.velocity.x = 0;
+    this.sprite.body.velocity.y = 0;
+
+    if (this.cursors.left.isDown)
+    {
+			this.sprite.body.velocity.x = -200;
+    }
+    else if (this.cursors.right.isDown)
+    {
+			this.sprite.body.velocity.x = 200;
+    }
+
+    if (this.cursors.up.isDown)
+    {
+			this.sprite.body.velocity.y = -200;
+    }
+    else if (this.cursors.down.isDown)
+    {
+			this.sprite.body.velocity.y = 200;
+    }
 	}
 }
 
