@@ -1,3 +1,78 @@
+platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+
+platforms.create(600, 400, 'ground');
+
+
+
+//  Here is an Event ...
+var playerEvent = new Phaser.Event('shoot');
+
+//  We'll use the States own EventDispatcher to listen for, and dispatch the events
+
+//  And here is listener
+this.events.on('shoot', handler);
+
+//  Dispatch the event
+this.events.dispatch(playerEvent);
+
+function handler(event) {
+
+    console.log('Event Received by Handler:', event);
+
+}
+
+
+this.anims.create({
+    key: 'left',
+    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+    frameRate: 10,
+    repeat: -1
+});
+
+
+player.body.setGravityY(300)
+
+this.physics.add.collider(player, platforms);
+
+
+
+
+stars = this.physics.add.group({
+    key: 'star',
+    repeat: 11,
+    setXY: { x: 12, y: 0, stepX: 70 }
+});
+
+stars.children.iterate(function (child) {
+
+    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+
+});
+
+this.physics.add.collider(stars, platforms);
+this.physics.add.overlap(player, stars, collectStar, null, this);
+function collectStar (player, star)
+{
+    star.disableBody(true, true);
+}
+
+
+this.physics.pause();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import StateTest1 from './stateTest1'; 
 
@@ -28,7 +103,7 @@ class SimpleGame
 		// add our logo image to the assets class under the
 		// key 'logo'. We're also setting the background colour
 		// so it's the same as the background colour in the image
-		this.game.load.image( 'logo', "assets/netzkern-logo.png" );
+		this.game.load.image( 'logo', "img/netzkern-logo.png" );
 		this.game.stage.backgroundColor = 0xffff59;
 	}
 	

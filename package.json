@@ -1,0 +1,33 @@
+{
+  "name": "netzkern.jumpandrun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-tsc": "^1.3.2",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^4.0.1",
+    "phaser": "^3.2.1",
+    "run-sequence": "^2.2.1",
+    "typescript": "^2.7.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthiasbruch/nkScrum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthiasbruch/nkScrum/issues"
+  },
+  "homepage": "https://github.com/matthiasbruch/nkScrum#readme"
+}
