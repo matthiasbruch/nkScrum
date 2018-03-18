@@ -11,6 +11,8 @@ class StatePlay extends Phaser.Scene {
 
   platforms: Phaser.Physics.Arcade.StaticGroup;
 
+  playerHasLanded: boolean;
+  
   create() {
     console.log('Starting PLAY state');
 
@@ -22,7 +24,6 @@ class StatePlay extends Phaser.Scene {
 
     this.sprite = this.physics.add.sprite(20, 20, 'player');
     this.sprite.setOrigin(0.5, 0.5);
-    this.sprite.setVelocityY(100);
     this.sprite.setBounceY(0.1);
     // this.sprite.setCollideWorldBounds(true);
     this.sprite.setMaxVelocity(400, 400);
@@ -31,28 +32,42 @@ class StatePlay extends Phaser.Scene {
 
     this.platforms = this.physics.add.staticGroup();
     for (var i = 0; i < 10; i++) {
-      this.platforms.create(300 * i, Math.floor(Math.random() * 500), 'stone');
+      this.platforms.create(300 * i, Math.floor(Math.random() * 200) + 300, 'stone');
     }
-    this.physics.add.collider(this.sprite, this.platforms, null, null, null);
+    var that = this;
+    this.physics.add.collider(this.sprite, this.platforms, function() {
+      that.playerHasLanded = true;
+    }, null, null);
   }
 
   update() {
     if (this.leftKey.isDown)
     {
-			this.sprite.setAccelerationX(-100);
+			this.sprite.setVelocityX(-200);
     }
     else if (this.rightKey.isDown)
     {
-			this.sprite.setAccelerationX(100);
+			this.sprite.setVelocityX(200);
+    }
+    else
+    {
+      this.sprite.setVelocityX(0);
     }
 
     if (this.upKey.isDown)
     {
-			this.sprite.setVelocityY(-200);
+      if (this.playerHasLanded) {
+        this.playerHasLanded = false;
+        this.sprite.setVelocityY(-500);
+      }
     }
     // else if (this.downKey.isDown)
     // {
 		// 	this.sprite.setAccelerationY(200);
+    // }
+    // else
+    // {
+    //   this.sprite.setAccelerationY(0);
     // }
 
     this.cameras.main.scrollX = this.sprite.x - 400;
