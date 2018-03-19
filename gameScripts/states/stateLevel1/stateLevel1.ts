@@ -38,6 +38,12 @@ class StatePlay extends Phaser.Scene {
     this.physics.add.collider(this.sprite, this.platforms, function() {
       that.playerHasLanded = true;
     }, null, null);
+
+    var music = this.sound.add('bg-music-1');
+    music.play({
+      loop: true,
+      volume: 0.05
+    });
   }
 
   update() {
