@@ -10,7 +10,7 @@ class StateLoad extends Phaser.Scene {
 		this.load.image('player', 'img/player.png');
     this.load.image('stone', 'img/stone.png');
     
-		this.load.audio('bg-music-1', 'music/firsttry.mp3');
+		this.load.audio('bg-music-1', 'music/firsttry.mp3', null, null);
   }
 
   create() {
